@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KiddoEdu</string>
+    <string name="kiddo_edu_category_vegetables">Vegetables</string>
+    <string name="kiddo_edu_category_fruits">Fruits</string>
+    <string name="kiddo_edu_category_shapes">Shapes</string>
+    <string name="kiddo_edu_category_animals">Animals</string>
+</resources>
