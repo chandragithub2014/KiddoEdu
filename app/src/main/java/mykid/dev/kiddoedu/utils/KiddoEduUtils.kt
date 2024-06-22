@@ -23,6 +23,12 @@ fun fetchSelectedCategoryList(selectedCategoryType:String = SelectedCategory.VEG
         SelectedCategory.ANIMALS -> {
             fetchSelectedCategoryAnimals()
         }
+        SelectedCategory.SHAPES -> {
+            fetchSelectedCategoryShapes()
+        }
+        SelectedCategory.FRUITS -> {
+            fetchSelectedCategoryFruits()
+        }
         else -> {
             fetchSelectedCategoryVegetables()
         }
@@ -64,6 +70,36 @@ fun fetchSelectedCategoryAnimals() = listOf(
     KiddoEduSelectedCategory("Squirrel",R.drawable.ic_squirrel),
     KiddoEduSelectedCategory("Tiger",R.drawable.ic_tiger),
     KiddoEduSelectedCategory("Turtle",R.drawable.ic_turtle),
-   // KiddoEduSelectedCategory("Zebra",R.drawable.ic_zebra),
+    KiddoEduSelectedCategory("Zebra",R.drawable.ic_zebra),
+
+)
+
+fun fetchSelectedCategoryFruits() = listOf(
+    KiddoEduSelectedCategory("Apple", R.drawable.ic_apple),
+    KiddoEduSelectedCategory("Banana", R.drawable.ic_bananas),
+    KiddoEduSelectedCategory("Cherry", R.drawable.ic_cherries),
+    KiddoEduSelectedCategory("Coconut", R.drawable.ic_coconut),
+    KiddoEduSelectedCategory("Grapes", R.drawable.ic_green_grapes),
+    KiddoEduSelectedCategory("Lemon", R.drawable.ic_lemon),
+    KiddoEduSelectedCategory("Orange", R.drawable.ic_orange),
+    KiddoEduSelectedCategory("Kiwi", R.drawable.ic_kiwi),
+    KiddoEduSelectedCategory("Pineapple", R.drawable.ic_pineapple),
+    KiddoEduSelectedCategory("Mango", R.drawable.ic_mango),
+    KiddoEduSelectedCategory("Pomegranate", R.drawable.ic_pomegranate),
+    KiddoEduSelectedCategory("Strawberry", R.drawable.ic_strawberry),
+    KiddoEduSelectedCategory("Watermelon", R.drawable.ic_watermelon)
+
+)
+
+fun fetchSelectedCategoryShapes() = listOf(
+    KiddoEduSelectedCategory("Circle", R.drawable.ic_circle),
+    KiddoEduSelectedCategory("Cube", R.drawable.ic_cube),
+    KiddoEduSelectedCategory("Cone", R.drawable.ic_cone),
+    KiddoEduSelectedCategory("Square", R.drawable.ic_square),
+    KiddoEduSelectedCategory("Rectangle", R.drawable.ic_rectangle),
+    KiddoEduSelectedCategory("Triangle", R.drawable.ic_triangle),
+    KiddoEduSelectedCategory("Hexagon", R.drawable.ic_hexagon),
+    KiddoEduSelectedCategory("Pentagon", R.drawable.ic_pentagon),
+    KiddoEduSelectedCategory("Octagon", R.drawable.ic_octagon)
 
 )
