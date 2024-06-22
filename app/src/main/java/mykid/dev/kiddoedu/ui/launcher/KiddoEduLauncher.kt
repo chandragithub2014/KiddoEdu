@@ -1,5 +1,7 @@
 package mykid.dev.kiddoedu.ui.launcher
 
+import android.speech.tts.TextToSpeech
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,10 +10,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -21,6 +30,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import mykid.dev.kiddoedu.common.AppScaffold
 import mykid.dev.kiddoedu.ui.category.DisplayKiddoEduCategory
+import mykid.dev.kiddoedu.ui.selectedCategory.DisplaySelectedCategoryGrid
+import mykid.dev.kiddoedu.utils.SelectedCategory
+import java.util.Locale
 
 
 @Composable
@@ -28,16 +40,44 @@ fun KiddoEduLauncherComposable(
     navController: NavHostController
 
 ) {
+    var selectedCategory by remember { mutableStateOf(SelectedCategory.ANIMALS) }
+    var textToSpeech by remember { mutableStateOf<TextToSpeech?>(null) }
+    val context = LocalContext.current
+
     AppScaffold(title = "KiddoEdu") { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
+            LaunchedEffect(Unit) {
+                textToSpeech = TextToSpeech(context) { status ->
+                    if (status == TextToSpeech.SUCCESS) {
+                        val result = textToSpeech?.setLanguage(Locale.US)
+                        if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                            // Language data is missing or the language is not supported.
+                            Toast.makeText(
+                                context,
+                                "Language data is missing or the language is not supported",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    } else {
+                        Toast.makeText(context, "Initialization Failed", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+            DisposeTextToSpeech(textToSpeech)
+
             ConstraintLayout(kiddoEduLayoutConstraints(), modifier = Modifier.fillMaxSize()) {
                 DisplayKiddoEduCategory(modifier = Modifier.layoutId("categoryContainer")){
                     println("Selected Category is $it")
+                    selectedCategory = it.categoryName
                 }
+                textToSpeech?.let {textToSpeechConverter ->
+                    DisplaySelectedCategoryGrid(modifier = Modifier.layoutId("categoryGrid"),selectedCategory,textToSpeechConverter)
+                }
+
                 Box(
                     modifier = Modifier
                         .layoutId("adsContainer")
@@ -52,6 +92,15 @@ fun KiddoEduLauncherComposable(
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun DisposeTextToSpeech(textToSpeech: TextToSpeech?) {
+    DisposableEffect(Unit) {
+        onDispose {
+            textToSpeech?.shutdown()
         }
     }
 }
