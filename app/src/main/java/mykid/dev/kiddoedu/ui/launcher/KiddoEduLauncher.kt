@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -15,6 +17,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +31,7 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.launch
 import mykid.dev.kiddoedu.common.AppScaffold
 import mykid.dev.kiddoedu.ui.category.DisplayKiddoEduCategory
 import mykid.dev.kiddoedu.ui.selectedCategory.DisplaySelectedCategoryGrid
@@ -43,7 +47,8 @@ fun KiddoEduLauncherComposable(
     var selectedCategory by remember { mutableStateOf(SelectedCategory.ANIMALS) }
     var textToSpeech by remember { mutableStateOf<TextToSpeech?>(null) }
     val context = LocalContext.current
-
+    val listState = rememberLazyGridState()
+    val coroutineScope = rememberCoroutineScope()
     AppScaffold(title = "KiddoEdu") { innerPadding ->
         Column(
             modifier = Modifier
@@ -68,14 +73,17 @@ fun KiddoEduLauncherComposable(
                 }
             }
             DisposeTextToSpeech(textToSpeech)
-
             ConstraintLayout(kiddoEduLayoutConstraints(), modifier = Modifier.fillMaxSize()) {
                 DisplayKiddoEduCategory(modifier = Modifier.layoutId("categoryContainer")){
                     println("Selected Category is $it")
                     selectedCategory = it.categoryName
+                    coroutineScope.launch {
+                        listState.scrollToItem(0, 0)
+                    }
+
                 }
                 textToSpeech?.let {textToSpeechConverter ->
-                    DisplaySelectedCategoryGrid(modifier = Modifier.layoutId("categoryGrid"),selectedCategory,textToSpeechConverter)
+                    DisplaySelectedCategoryGrid(modifier = Modifier.layoutId("categoryGrid"),selectedCategory,textToSpeechConverter,listState)
                 }
 
                 Box(

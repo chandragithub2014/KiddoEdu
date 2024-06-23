@@ -17,8 +17,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material3.Text
@@ -27,6 +29,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,19 +44,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import mykid.dev.kiddoedu.domain.model.KiddoEduSelectedCategory
 import mykid.dev.kiddoedu.utils.fetchSelectedCategoryList
 
 @Composable
-fun DisplaySelectedCategoryGrid(modifier: Modifier = Modifier, selectedType: String, textToSpeech: TextToSpeech,) {
+fun DisplaySelectedCategoryGrid(modifier: Modifier = Modifier, selectedType: String, textToSpeech: TextToSpeech,  listState: LazyGridState ) {
     val selectedCategoryInfoList = fetchSelectedCategoryList(selectedType)
+
     LazyVerticalGrid(
         columns = GridCells.Fixed(3), verticalArrangement = Arrangement.spacedBy(4.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp),
         modifier = modifier
             // Add extra padding at the bottom to allow scrolling
-            .padding(top = 30.dp, bottom = 20.dp)
+            .padding(top = 30.dp, bottom = 20.dp),
+        state = listState
 
         //.verticalScroll(rememberScrollState(), enabled = true)
     ) {
@@ -68,7 +74,9 @@ fun DisplaySelectedCategoryGrid(modifier: Modifier = Modifier, selectedType: Str
                 )
             }
         }
+
     }
+
 }
 
 
@@ -95,8 +103,8 @@ fun SelectedCategoryItem(
     Card(
         backgroundColor = Color.White,
         modifier = Modifier
-            .width(100.dp) // Set width
-            .height(100.dp)
+            .width(110.dp) // Set width
+            .height(110.dp)
            // .padding(10.dp)
             .clickable {
                 onClick(selectedCategoryItem.selectedCategoryName)

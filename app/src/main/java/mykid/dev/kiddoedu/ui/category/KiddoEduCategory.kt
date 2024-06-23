@@ -27,6 +27,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -121,7 +122,9 @@ fun DisplayKiddoEduCategory(
             onSelectCategory(category)
         }
 
-        KiddoEduCategoryPagerIndicator(state, categoryList, coroutineScope)
+        KiddoEduCategoryPagerIndicator(state, categoryList, coroutineScope){category ->
+            onSelectCategory(category)
+        }
 
     }
 
@@ -132,7 +135,8 @@ fun DisplayKiddoEduCategory(
 private fun KiddoEduCategoryPagerIndicator(
     state: PagerState,
     categoryList: List<KiddoEduCategory>,
-    coroutineScope: CoroutineScope
+    coroutineScope: CoroutineScope,
+    onSelectCategory: (KiddoEduCategory) -> Unit
 ) {
     HorizontalPagerIndicator(
         pagerState = state, pageCount = categoryList.size,
@@ -145,7 +149,10 @@ private fun KiddoEduCategoryPagerIndicator(
                 val totalPages = categoryList.size
                 val nextPage =
                     if (currentPage < totalPages - 1) currentPage + 1 else 0
-                coroutineScope.launch { state.animateScrollToPage(nextPage) }
+                coroutineScope.launch {
+                    state.animateScrollToPage(nextPage)
+                    onSelectCategory(kiddoEduCategories[nextPage])
+                }
             }
             .focusable()
             .semantics {
@@ -165,6 +172,12 @@ private fun KiddoEduCategoryCarousel(
     coroutineScope: CoroutineScope,
     onSelectCategory: (KiddoEduCategory) -> Unit
 ) {
+    LaunchedEffect(state) {
+        snapshotFlow { state.currentPage }.collect { currentPage ->
+            println("Current middle page: $currentPage")
+            onSelectCategory(kiddoEduCategories[currentPage])
+        }
+    }
     HorizontalPager(
         state = state, contentPadding = PaddingValues(horizontal = 64.dp),
         modifier = Modifier.focusable(),
