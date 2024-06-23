@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -103,7 +104,8 @@ fun SelectedCategoryItem(
     Card(
         backgroundColor = Color.White,
         modifier = Modifier
-            .width(110.dp) // Set width
+          //  .width(110.dp) // Set width
+            .widthIn(min = 110.dp)
             .height(110.dp)
            // .padding(10.dp)
             .clickable {
@@ -114,14 +116,7 @@ fun SelectedCategoryItem(
         shape = RoundedCornerShape(2.dp),
         elevation = 8.dp,
     ) {
-       /* Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .semantics(mergeDescendants = true) {
-                    contentDescription = selectedCategoryItem.selectedCategoryName
-                },
-            contentAlignment = Alignment.Center
-        ) {*/
+
 
 
             Box(
@@ -145,7 +140,7 @@ fun SelectedCategoryItem(
                         },
                     style = TextStyle(
                         color = Color(android.graphics.Color.parseColor("#AF1818")),
-                        fontSize = 24.sp,
+                        fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
                         // Set the desired font size here
                     )
@@ -157,7 +152,32 @@ fun SelectedCategoryItem(
                         .align(Alignment.TopCenter)
                         .padding(top = 8.dp)
                 )
+               /* Column(horizontalAlignment = Alignment.CenterHorizontally) { // Use a Column for better layout
+                    Image(
+                        painter = painterResource(id = selectedCategoryItem.selectedCategoryImage),
+                        contentDescription = selectedCategoryItem.selectedCategoryName,
+                        modifier = Modifier
+                            .padding(top = 8.dp)
+                           // .size(48.dp) // Adjust image size as needed
+                    )
+                    Text(
+                        text = selectedCategoryItem.selectedCategoryName,
+                        modifier = Modifier
+                            .padding(top = 4.dp) // Add padding above text
+                            .graphicsLayer {
+                                scaleX = scale
+                                scaleY = scale
+                                transformOrigin = TransformOrigin.Center
+                            },
+                        textAlign = TextAlign.Center, // Center the text
+                        style = TextStyle(
+                            color = Color(android.graphics.Color.parseColor("#AF1818")),
+                            fontSize = 24.sp, // Adjust font size as needed
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }*/
             }
         }
-   // }
+
 }

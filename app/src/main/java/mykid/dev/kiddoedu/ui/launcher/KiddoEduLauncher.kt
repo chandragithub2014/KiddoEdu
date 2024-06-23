@@ -33,6 +33,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import mykid.dev.kiddoedu.common.AppScaffold
+import mykid.dev.kiddoedu.ui.ads.AdBanner
 import mykid.dev.kiddoedu.ui.category.DisplayKiddoEduCategory
 import mykid.dev.kiddoedu.ui.selectedCategory.DisplaySelectedCategoryGrid
 import mykid.dev.kiddoedu.utils.SelectedCategory
@@ -90,14 +91,9 @@ fun KiddoEduLauncherComposable(
                     modifier = Modifier
                         .layoutId("adsContainer")
                         .fillMaxWidth()
-                        .background(Color.Cyan)
+                        .background(Color.White)
                 ) {
-                    Text(
-                        text = "BottomContainer",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.Center)
-                    )
+                    AdBanner(modifier = Modifier.align(Alignment.Center))
                 }
             }
         }
@@ -145,7 +141,7 @@ private fun kiddoEduLayoutConstraints(): ConstraintSet {
             start.linkTo(parent.start)
             end.linkTo(parent.end)
             width = Dimension.fillToConstraints
-            height = Dimension.value(100.dp)
+            height = Dimension.wrapContent
         }
     }
 }
