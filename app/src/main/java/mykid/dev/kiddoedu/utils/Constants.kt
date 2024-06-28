@@ -6,5 +6,6 @@ class SelectedCategory {
         const val ANIMALS = "Animals"
         const val FRUITS = "Fruits"
         const val SHAPES = "Shapes"
+        const val VEHICLES = "Vehicles"
     }
 }
