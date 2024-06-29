@@ -55,6 +55,7 @@ fun KiddoEduLauncherComposable(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
+                .background(Color.White)
         ) {
             LaunchedEffect(Unit) {
                 textToSpeech = TextToSpeech(context) { status ->

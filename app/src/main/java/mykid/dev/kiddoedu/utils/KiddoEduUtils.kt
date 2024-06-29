@@ -48,6 +48,7 @@ fun fetchSelectedCategoryVegetables() = listOf(
     KiddoEduSelectedCategory("Carrot",R.drawable.ic_carrot),
     KiddoEduSelectedCategory("Cauliflower",R.drawable.ic_cauliflower),
     KiddoEduSelectedCategory("Chilli",R.drawable.ic_chilli),
+    KiddoEduSelectedCategory("Corn",R.drawable.ic_corn),
     KiddoEduSelectedCategory("Eggplant",R.drawable.ic_brinjal),
     KiddoEduSelectedCategory("Garlic",R.drawable.ic_garlic),
     KiddoEduSelectedCategory("Okra",R.drawable.ic_okra),
