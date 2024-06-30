@@ -6,7 +6,9 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,7 +25,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -102,19 +107,22 @@ fun SelectedCategoryItem(
     }
 
     Card(
-        backgroundColor = Color.White,
-        modifier = Modifier
+        //backgroundColor = Color.White,
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        border = BorderStroke(width = 1.dp, color = Color.LightGray),
+                modifier = Modifier
           //  .width(110.dp) // Set width
             .widthIn(min = 110.dp)
             .height(110.dp)
+
            // .padding(10.dp)
             .clickable {
                 onClick(selectedCategoryItem.selectedCategoryName)
                 isSelected = !isSelected
             },
         //  .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(2.dp)),
-        shape = RoundedCornerShape(2.dp),
-        elevation = 8.dp,
+        shape = RoundedCornerShape(1.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
 
 
@@ -132,7 +140,7 @@ fun SelectedCategoryItem(
                     text = selectedCategoryItem.selectedCategoryName,
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
-                       // .padding(5.dp)
+                         .padding(bottom = 2.dp)
                         .graphicsLayer {
                             scaleX = scale
                             scaleY = scale
