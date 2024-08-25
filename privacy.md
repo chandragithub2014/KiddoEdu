@@ -1,16 +1,17 @@
 **About App**
 
-Introducing KidzzKit, the ultimate starting kit for kids! KidzzKit is an interactive app designed to introduce children to the basics of alphabets, numbers, colors, months, and weekdays in a fun and engaging way. With five exciting features, KidzzKit offers an immersive learning experience for young learners.
+KiddoEdu is a fun and engaging educational app for kids, featuring sections like Vegetables, Fruits, Animals, Shapes, and Vehicles. Tap on an item to hear its name spoken aloud, making learning interactive and enjoyable!
+
 
 **Privacy policy**
 
 
-**Last updated March 26,2024**
+**Last updated August 25,2024**
 
 
 **Information Collection and Use**
 
-We do not collect or share any personal information from users of the KidzzKit app, especially from children under the age of 13. In fact the app does not collect information about user of any age.
+We do not collect or share any personal information from users of the KiddoEdu app, especially from children under the age of 13. In fact the app does not collect information about user of any age.
 The app does not collect any information about user .
 
 
