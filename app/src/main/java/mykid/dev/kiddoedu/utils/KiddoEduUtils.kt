@@ -12,7 +12,8 @@ fun fetchKiddoEduCategories(context: Context) = listOf(
     ),
     KiddoEduCategory(context.getString(R.string.kiddo_edu_category_fruits), R.drawable.ic_fruit),
     KiddoEduCategory(context.getString(R.string.kiddo_edu_category_animals), R.drawable.ic_animal),
-    KiddoEduCategory(context.getString(R.string.kiddo_edu_category_shapes), R.drawable.ic_shape)
+    KiddoEduCategory(context.getString(R.string.kiddo_edu_category_shapes), R.drawable.ic_shape),
+    KiddoEduCategory(context.getString(R.string.kiddo_edu_category_vehicles), R.drawable.ic_car)
 )
 
 fun fetchSelectedCategoryList(selectedCategoryType:String = SelectedCategory.VEGETABLES) : List<KiddoEduSelectedCategory>{
@@ -29,6 +30,9 @@ fun fetchSelectedCategoryList(selectedCategoryType:String = SelectedCategory.VEG
         SelectedCategory.FRUITS -> {
             fetchSelectedCategoryFruits()
         }
+        SelectedCategory.VEHICLES -> {
+            fetchSelectedCategoryVehicles()
+        }
         else -> {
             fetchSelectedCategoryVegetables()
         }
@@ -39,12 +43,17 @@ fun fetchSelectedCategoryList(selectedCategoryType:String = SelectedCategory.VEG
 fun fetchSelectedCategoryVegetables() = listOf(
     KiddoEduSelectedCategory("Beetroot",R.drawable.ic_beet_root),
     KiddoEduSelectedCategory("Brinjal",R.drawable.ic_brinjal),
+    KiddoEduSelectedCategory("Cabbage",R.drawable.ic_cabbage),
     KiddoEduSelectedCategory("Capsicum",R.drawable.ic_capsicum),
     KiddoEduSelectedCategory("Carrot",R.drawable.ic_carrot),
+    KiddoEduSelectedCategory("Cauliflower",R.drawable.ic_cauliflower),
     KiddoEduSelectedCategory("Chilli",R.drawable.ic_chilli),
+    KiddoEduSelectedCategory("Corn",R.drawable.ic_corn),
     KiddoEduSelectedCategory("Eggplant",R.drawable.ic_brinjal),
     KiddoEduSelectedCategory("Garlic",R.drawable.ic_garlic),
     KiddoEduSelectedCategory("Okra",R.drawable.ic_okra),
+    KiddoEduSelectedCategory("Onion",R.drawable.ic_onion),
+    KiddoEduSelectedCategory("Peas",R.drawable.ic_peas),
     KiddoEduSelectedCategory("Potato",R.drawable.ic_potato),
     KiddoEduSelectedCategory("RedChilli",R.drawable.ic_red_chilli),
     KiddoEduSelectedCategory("Pumpkin",R.drawable.ic_pumpkin),
@@ -102,4 +111,18 @@ fun fetchSelectedCategoryShapes() = listOf(
     KiddoEduSelectedCategory("Pentagon", R.drawable.ic_pentagon),
     KiddoEduSelectedCategory("Octagon", R.drawable.ic_octagon)
 
+)
+
+fun fetchSelectedCategoryVehicles() = listOf(
+    KiddoEduSelectedCategory("Aeroplane", R.drawable.ic_airplane),
+    KiddoEduSelectedCategory("Bus", R.drawable.ic_bus),
+    KiddoEduSelectedCategory("Car", R.drawable.ic_car),
+    KiddoEduSelectedCategory("Cycle", R.drawable.ic_cycle),
+    KiddoEduSelectedCategory("Helicopter", R.drawable.ic_helicopter),
+    KiddoEduSelectedCategory("Rocket", R.drawable.ic_rocket),
+    KiddoEduSelectedCategory("Scooter", R.drawable.ic_scooter),
+    KiddoEduSelectedCategory("Ship", R.drawable.ic_ship),
+    KiddoEduSelectedCategory("Train", R.drawable.ic_train),
+    KiddoEduSelectedCategory("Truck", R.drawable.ic_truck),
+    KiddoEduSelectedCategory("Van", R.drawable.ic_van)
 )
